@@ -1,0 +1,21 @@
+{
+  "name": "notation-census",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "katex": "^0.16.11",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@11ty/eleventy-plugin-directory-output": "^1.0.1"
+  }
+}
