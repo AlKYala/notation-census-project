@@ -1,0 +1,12 @@
+---
+layout: base.njk
+---
+
+<h1>Notation Census</h1>
+
+<h2>All Notations</h2>
+<ul>
+{% for notation in notations %}
+  <li><a href="/notations/{{ notation.title | slug }}/">{{ notation.title }}</a></li>
+{% endfor %}
+</ul>

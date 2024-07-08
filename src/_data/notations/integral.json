@@ -1,0 +1,18 @@
+{
+    "title": "Integral",
+    "symbol": "∫",
+    "definition": "In mathematics, an integral assigns numbers to functions in a way that describes displacement, area, volume, and other concepts that arise by combining infinitesimal data.",
+    "usage": "The integral of a function f with respect to a variable x is written as: ∫ f(x) dx",
+    "examples": [
+      {
+        "description": "Definite integral from a to b",
+        "latex": "\\int_{a}^{b} f(x) dx"
+      },
+      {
+        "description": "Indefinite integral",
+        "latex": "\\int f(x) dx = F(x) + C"
+      }
+    ],
+    "tags": ["calculus", "analysis", "fundamental theorem of calculus"],
+    "relatedConcepts": ["derivative", "fundamental theorem of calculus", "antiderivative"]
+  }

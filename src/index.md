@@ -1,5 +1,7 @@
 ---
 layout: base.njk
-title: Notation Census Project
+title: Notation Census
 ---
-# Welcome to the Notation Census Project
+# Welcome to the Notation Census
+
+This is the homepage of our project.
