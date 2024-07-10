@@ -1,0 +1,18 @@
+{
+    "title": "Vector",
+    "symbol": "→",
+    "definition": "A vector is a quantity having direction as well as magnitude, especially as determining the position of one point in space relative to another.",
+    "usage": "Vectors are used in physics to represent forces, velocities, and other directional quantities.",
+    "examples": [
+      {
+        "description": "2D vector",
+        "latex": "\\vec{v} = (x, y)"
+      },
+      {
+        "description": "Dot product",
+        "latex": "\\vec{a} \\cdot \\vec{b} = a_1b_1 + a_2b_2 + a_3b_3"
+      }
+    ],
+    "tags": ["linear algebra", "physics", "geometry"],
+    "relatedConcepts": ["scalar", "cross product", "basis"]
+  }

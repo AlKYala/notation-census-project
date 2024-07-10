@@ -1,0 +1,18 @@
+{
+    "title": "Matrix",
+    "symbol": "[ ]",
+    "definition": "A matrix is a rectangular array of numbers, symbols, or expressions, arranged in rows and columns.",
+    "usage": "Matrices are often used to represent linear transformations and solve systems of linear equations.",
+    "examples": [
+      {
+        "description": "2x2 matrix",
+        "latex": "A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}"
+      },
+      {
+        "description": "Matrix multiplication",
+        "latex": "AB = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix} \\begin{bmatrix} e & f \\\\ g & h \\end{bmatrix}"
+      }
+    ],
+    "tags": ["linear algebra", "arrays", "linear transformations"],
+    "relatedConcepts": ["determinant", "vector", "eigenvalue"]
+  }
