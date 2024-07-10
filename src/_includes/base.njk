@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default("Notation Census") }}</title>
 </head>
 <body>
-  {{ content | safe }}
+    <nav>
+        <a href="/">Home</a>
+        <a href="/tags/">All Tags</a>
+    </nav>
+    
+    {{ content | safe }}
 </body>
 </html>
