@@ -1,0 +1,58 @@
+---
+layout: base.njk
+pagination:
+  data: notations
+  size: 1
+  alias: notationEntry
+  resolve: values
+permalink: "notations/{{ notationEntry.title | slug }}/"
+---
+
+<article class="notation">
+  <h1>{{ notationEntry.title }}</h1>
+  
+  <section class="symbol">
+    <h2>Symbol</h2>
+    <p class="large-symbol">{{ notationEntry.symbol }}</p>
+  </section>
+
+  <section class="definition">
+    <h2>Definition</h2>
+    <p>{{ notationEntry.definition }}</p>
+  </section>
+
+  <section class="usage">
+    <h2>Usage</h2>
+    <p>{{ notationEntry.usage }}</p>
+  </section>
+
+  <section class="examples">
+    <h2>Examples</h2>
+    <ul>
+    {% for example in notationEntry.examples %}
+      <li>
+        <p>{{ example.description }}</p>
+        <p class="latex">{{ example.latex }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section class="tags">
+    <h2>Tags</h2>
+    <ul>
+    {% for tag in notationEntry.tags %}
+      <li>{{ tag }}</li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section class="related-concepts">
+    <h2>Related Concepts</h2>
+    <ul>
+    {% for concept in notationEntry.relatedConcepts %}
+      <li>{{ concept }}</li>
+    {% endfor %}
+    </ul>
+  </section>
+</article>
