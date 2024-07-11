@@ -6,6 +6,16 @@ layout: base.njk
 
 <ul>
 {% for notationKey, notation in notations %}
-  <li><a href="/notations/{{ notation.title | slug }}/">{{ notation.title }}</a></li>
+  <li>
+    <a href="/notations/{{ notation.title | slug }}/">{{ notation.title }}</a>
+    <small>(Tags: 
+      {% for tag in notation.tags %}
+        <a href="/tags/{{ tag | slug }}/">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    )</small>
+  </li>
 {% endfor %}
 </ul>
+
+<h2>All Tags</h2>
+<p><a href="/tags/">View all tags</a></p>

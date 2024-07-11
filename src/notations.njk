@@ -42,7 +42,7 @@ permalink: "notations/{{ notationEntry.title | slug }}/"
     <h2>Tags</h2>
     <ul>
     {% for tag in notationEntry.tags %}
-      <li>{{ tag }}</li>
+      <li><a href="/tags/{{ tag | slug }}/">{{ tag }}</a></li>
     {% endfor %}
     </ul>
   </section>

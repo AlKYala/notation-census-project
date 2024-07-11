@@ -1,0 +1,18 @@
+{
+    "title": "Set",
+    "symbol": "{ }",
+    "definition": "A set is a collection of distinct objects, considered as an object in its own right.",
+    "usage": "Sets are used to group objects and are fundamental to many areas of mathematics.",
+    "examples": [
+      {
+        "description": "Set of integers",
+        "latex": "\\mathbb{Z} = {\\ldots, -2, -1, 0, 1, 2, \\ldots}"
+      },
+      {
+        "description": "Set-builder notation",
+        "latex": "A = \\{x \\in \\mathbb{R} | x^2 < 4\\}"
+      }
+    ],
+    "tags": ["set theory", "foundations", "logic"],
+    "relatedConcepts": ["function", "relation", "cardinality"]
+  }
