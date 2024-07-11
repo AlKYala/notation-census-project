@@ -1,7 +1,5 @@
-const { Octokit } = require("@octokit/rest");
-require('dotenv').config();
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const dotenv = require('dotenv');
+dotenv.config();
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -9,6 +7,9 @@ exports.handler = async (event) => {
   }
 
   try {
+    const { Octokit } = await import("@octokit/rest");
+    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+
     const { payload } = JSON.parse(event.body);
     const { title, symbol, definition, usage, tags } = payload;
 
