@@ -1,0 +1,11 @@
+[build]
+  publish = "dist"
+  command = "npx @11ty/eleventy"
+
+[[redirects]]
+  from = "/success"
+  to = "/success/"
+  status = 200
+
+[forms."notation-submission"]
+  success_url = "/success"

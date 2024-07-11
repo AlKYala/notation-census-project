@@ -1,0 +1,42 @@
+---
+layout: base.njk
+title: Submit a New Notation
+---
+
+<h1>Submit a New Notation</h1>
+
+<form name="notation-submission" method="POST" data-netlify="true">
+  <p>
+    <label>Title: <input type="text" name="title" required /></label>
+  </p>
+  <p>
+    <label>Symbol: <input type="text" name="symbol" required /></label>
+  </p>
+  <p>
+    <label>Definition: <textarea name="definition" required></textarea></label>
+  </p>
+  <p>
+    <label>Usage: <textarea name="usage" required></textarea></label>
+  </p>
+  <p>
+    <label>Example 1 Description: <input type="text" name="example1_description" /></label>
+  </p>
+  <p>
+    <label>Example 1 LaTeX: <input type="text" name="example1_latex" /></label>
+  </p>
+  <p>
+    <label>Example 2 Description: <input type="text" name="example2_description" /></label>
+  </p>
+  <p>
+    <label>Example 2 LaTeX: <input type="text" name="example2_latex" /></label>
+  </p>
+  <p>
+    <label>Tags (comma-separated): <input type="text" name="tags" required /></label>
+  </p>
+  <p>
+    <label>Related Concepts (comma-separated): <input type="text" name="relatedConcepts" /></label>
+  </p>
+  <p>
+    <button type="submit">Submit Notation</button>
+  </p>
+</form>

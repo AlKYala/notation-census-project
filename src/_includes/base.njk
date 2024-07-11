@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title | default("Notation Census") }}</title>
+    <script src="/assets/js/form-validation.js"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
     <nav>
         <a href="/">Home</a>
         <a href="/tags/">All Tags</a>
+        <a href="/submit/">Submit Notation</a>
     </nav>
     
     {{ content | safe }}
