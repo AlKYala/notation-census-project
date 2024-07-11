@@ -1,6 +1,7 @@
 [build]
   publish = "dist"
   command = "npx @11ty/eleventy"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/success"
@@ -9,3 +10,8 @@
 
 [forms."notation-submission"]
   success_url = "/success"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
