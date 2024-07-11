@@ -1,0 +1,18 @@
+{
+    "title": "Exponential Function",
+    "symbol": "e^x",
+    "definition": "The exponential function is a mathematical function that quickly grows in value as its input increases. It is commonly written as e^x, where e is Euler's number.",
+    "usage": "Used in modeling growth and decay processes, compound interest, and many natural phenomena.",
+    "examples": [
+      {
+        "description": "Basic form",
+        "latex": "f(x) = e^x"
+      },
+      {
+        "description": "General form",
+        "latex": "f(x) = a \\cdot e^{bx}"
+      }
+    ],
+    "tags": ["calculus", "analysis", "functions"],
+    "relatedConcepts": ["natural logarithm", "derivative", "Taylor series"]
+  }

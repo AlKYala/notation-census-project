@@ -1,0 +1,18 @@
+{
+    "title": "Eigenvalue",
+    "symbol": "λ",
+    "definition": "An eigenvalue is a scalar associated with a linear system of equations that scales an eigenvector of a linear transformation.",
+    "usage": "Used in studying dynamic systems, quantum mechanics, and data reduction techniques like Principal Component Analysis.",
+    "examples": [
+      {
+        "description": "Eigenvalue equation",
+        "latex": "A\\mathbf{v} = \\lambda\\mathbf{v}"
+      },
+      {
+        "description": "Characteristic polynomial",
+        "latex": "\\det(A - \\lambda I) = 0"
+      }
+    ],
+    "tags": ["linear algebra", "matrices", "differential equations"],
+    "relatedConcepts": ["eigenvector", "diagonalization", "spectral theorem"]
+  }

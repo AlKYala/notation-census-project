@@ -1,0 +1,18 @@
+{
+    "title": "Fourier Transform",
+    "symbol": "ℱ",
+    "definition": "The Fourier transform decomposes a function of time into its constituent frequencies.",
+    "usage": "Used in signal processing, image analysis, and solving partial differential equations.",
+    "examples": [
+      {
+        "description": "Continuous Fourier Transform",
+        "latex": "\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x)e^{-2\\pi i x \\xi} dx"
+      },
+      {
+        "description": "Discrete Fourier Transform",
+        "latex": "X_k = \\sum_{n=0}^{N-1} x_n e^{-\\frac{2\\pi i}{N}kn}"
+      }
+    ],
+    "tags": ["analysis", "signal processing", "differential equations"],
+    "relatedConcepts": ["Laplace transform", "wavelets", "frequency domain"]
+  }
