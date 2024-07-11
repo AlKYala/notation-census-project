@@ -1,0 +1,18 @@
+{
+    "title": "Logarithm",
+    "symbol": "log",
+    "definition": "The logarithm of a number is the exponent to which another fixed value, the base, must be raised to produce that number.",
+    "usage": "Used in solving exponential equations, measuring earthquake intensity (Richter scale), and in information theory.",
+    "examples": [
+      {
+        "description": "Natural logarithm",
+        "latex": "\\ln(x) = y \\iff e^y = x"
+      },
+      {
+        "description": "Logarithm with base 10",
+        "latex": "\\log_{10}(100) = 2"
+      }
+    ],
+    "tags": ["algebra", "analysis", "functions"],
+    "relatedConcepts": ["exponential function", "change of base formula", "logarithmic scale"]
+  }
