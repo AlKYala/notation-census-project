@@ -3,6 +3,14 @@
   command = "npx @11ty/eleventy"
   functions = "netlify/functions"
 
+[dev]
+  command = "npx @11ty/eleventy --serve"
+  targetPort = 8080
+  port = 8888
+  publish = "dist"
+  jwtRolePath = "app_metadata.authorization.roles"
+  jwtSecret = "REPLACE_ME_WITH_YOUR_SECRET"
+
 [[redirects]]
   from = "/success"
   to = "/success/"

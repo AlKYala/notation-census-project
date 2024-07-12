@@ -1,5 +1,5 @@
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
+const querystring = require('querystring');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -10,15 +10,24 @@ exports.handler = async (event) => {
     const { Octokit } = await import("@octokit/rest");
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-    const { payload } = JSON.parse(event.body);
-    const { title, symbol, definition, usage, tags } = payload;
+    // Parse the form data
+    const payload = querystring.parse(event.body);
+
+    console.log('Received payload:', payload);  // Debug log
+
+    const { title, symbol, definition, usage, tags, example1_description, example1_latex, example2_description, example2_latex, relatedConcepts } = payload;
 
     const content = JSON.stringify({
       title,
       symbol,
       definition,
       usage,
+      examples: [
+        { description: example1_description, latex: example1_latex },
+        { description: example2_description, latex: example2_latex }
+      ],
       tags: tags.split(',').map(tag => tag.trim()),
+      relatedConcepts: relatedConcepts.split(',').map(concept => concept.trim())
     }, null, 2);
 
     const fileName = `${title.toLowerCase().replace(/\s+/g, '-')}.json`;
@@ -37,6 +46,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ message: "Notation added successfully" }),
     };
   } catch (error) {
+    console.error('Error:', error);  // Debug log
     return { statusCode: 500, body: error.toString() };
   }
 };
