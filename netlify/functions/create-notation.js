@@ -32,13 +32,19 @@ exports.handler = async (event) => {
 
     const fileName = `${title.toLowerCase().replace(/\s+/g, '-')}.json`;
 
-    await octokit.repos.createOrUpdateFileContents({
-      owner: 'your-github-username',
-      repo: 'your-repo-name',
+    const repoDetails = {
+      owner: 'AlKYala',
+      repo: 'notation-census-project',
       path: `src/_data/notations/${fileName}`,
+      branch: 'develop'
+    };
+
+    console.log('Repo details:', repoDetails);
+
+    await octokit.repos.createOrUpdateFileContents({
+      ...repoDetails,
       message: `Add new notation: ${title}`,
-      content: Buffer.from(content).toString('base64'),
-      branch: 'main'
+      content: Buffer.from(content).toString('base64')
     });
 
     return {
@@ -46,7 +52,10 @@ exports.handler = async (event) => {
       body: JSON.stringify({ message: "Notation added successfully" }),
     };
   } catch (error) {
-    console.error('Error:', error);  // Debug log
-    return { statusCode: 500, body: error.toString() };
+    console.error('Error details:', error.message, error.status, error.headers);
+    if (error.response) {
+      console.error('Error response:', error.response.data);
+    }
+    return { statusCode: 500, body: JSON.stringify({ error: error.message, details: error.response ? error.response.data : 'No additional details' }) };
   }
 };
