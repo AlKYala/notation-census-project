@@ -1,0 +1,26 @@
+{
+  "title": "rraaa",
+  "symbol": "aaa",
+  "definition": "aaa",
+  "usage": "aa",
+  "examples": [
+    {
+      "description": "aa",
+      "latex": "aa"
+    },
+    {
+      "description": "aa",
+      "latex": "aa"
+    }
+  ],
+  "tags": [
+    "linear algebra",
+    "physics",
+    "geometry"
+  ],
+  "relatedConcepts": [
+    "scalar",
+    "cross product",
+    "basis"
+  ]
+}
