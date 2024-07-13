@@ -22,13 +22,17 @@ title: Submit a New Notation
     <label>Example 1 Description: <input type="text" name="example1_description" /></label>
   </p>
   <p>
-    <label>Example 1 LaTeX: <input type="text" name="example1_latex" /></label>
+    <label>Example 1 LaTeX:</label>
+    <span id="latex-editor-1"></span>
+    <input type="hidden" name="example1_latex" id="example1_latex_input" />
   </p>
   <p>
     <label>Example 2 Description: <input type="text" name="example2_description" /></label>
   </p>
   <p>
-    <label>Example 2 LaTeX: <input type="text" name="example2_latex" /></label>
+    <label>Example 2 LaTeX:</label>
+    <span id="latex-editor-2"></span>
+    <input type="hidden" name="example2_latex" id="example2_latex_input" />
   </p>
   <p>
     <label>Tags (comma-separated): <input type="text" name="tags" required /></label>
@@ -39,4 +43,58 @@ title: Submit a New Notation
   <p>
     <button type="submit">Submit Notation</button>
   </p>
+
+  <p>
+  <label>Preview:</label>
+  <div id="latex-preview-1"></div>
+  <div id="latex-preview-2"></div>
+</p>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mathField1 = MQ.MathField(document.getElementById('latex-editor-1'), {
+      handlers: {
+        edit: function() {
+          document.getElementById('example1_latex_input').value = mathField1.latex();
+        }
+      }
+
+      
+    });
+
+    var mathField2 = MQ.MathField(document.getElementById('latex-editor-2'), {
+      handlers: {
+        edit: function() {
+          document.getElementById('example2_latex_input').value = mathField2.latex();
+        }
+      }
+    });
+
+      function updatePreview(mathField, previewId) {
+      var latex = mathField.latex();
+      var preview = document.getElementById(previewId);
+      katex.render(latex, preview, {
+        throwOnError: false
+      });
+    }
+
+    mathField1.config({
+      handlers: {
+        edit: function() {
+          document.getElementById('example1_latex_input').value = mathField1.latex();
+          updatePreview(mathField1, 'latex-preview-1');
+        }
+      }
+    });
+
+    mathField2.config({
+      handlers: {
+        edit: function() {
+          document.getElementById('example2_latex_input').value = mathField2.latex();
+          updatePreview(mathField2, 'latex-preview-2');
+        }
+      }
+    });
+  });
+</script>
