@@ -8,6 +8,11 @@ pagination:
 permalink: "notations/{{ notationEntry.title | slug }}/"
 ---
 
+<pre>
+Debug Info:
+{{ notationEntry | dump(2) }}
+</pre>
+
 <article class="notation">
   <h1>{{ notationEntry.title }}</h1>
   
@@ -26,17 +31,17 @@ permalink: "notations/{{ notationEntry.title | slug }}/"
     <p>{{ notationEntry.usage }}</p>
   </section>
 
-  <section class="examples">
-    <h2>Examples</h2>
-    <ul>
-    {% for example in notationEntry.examples %}
-      <li>
-        <p>{{ example.description }}</p>
-        <p class="latex">{{ example.latex }}</p>
-      </li>
-    {% endfor %}
-    </ul>
-  </section>
+<section class="examples">
+  <h2>Examples</h2>
+  <ul>
+  {% for example in notationEntry.examples %}
+    <li>
+      <p>Description: {{ example.description }}</p>
+      <p>LaTeX: <math-field read-only>{{ example.latex }}</math-field></p>
+    </li>
+  {% endfor %}
+  </ul>
+</section>
 
   <section class="tags">
     <h2>Tags</h2>
@@ -56,3 +61,24 @@ permalink: "notations/{{ notationEntry.title | slug }}/"
     </ul>
   </section>
 </article>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('math-field').forEach(function(element) {
+    element.setValue(element.textContent);
+  });
+});
+</script>
+
+<style>
+.large-symbol {
+  font-size: 2em;
+  font-weight: bold;
+}
+.latex-render {
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+</style>
