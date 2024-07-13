@@ -1,36 +1,56 @@
 require('dotenv').config();
-const querystring = require('querystring');
+const { Buffer } = require('buffer');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+  console.log("Received headers:", JSON.stringify(event.headers, null, 2));
+  console.log("Received body:", event.body);
+
   try {
     const { Octokit } = await import("@octokit/rest");
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
     // Parse the form data
-    const payload = querystring.parse(event.body);
+    const formData = new URLSearchParams(event.body);
+    const fields = Object.fromEntries(formData);
 
-    console.log('Received payload:', payload);  // Debug log
+    console.log('Parsed fields:', fields);
 
-    const { title, symbol, definition, usage, tags, example1_description, example1_latex, example2_description, example2_latex, relatedConcepts } = payload;
+    // Handle image separately if it exists
+    let imagePath = '';
+    if (event.isBase64Encoded) {
+      const imageBuffer = Buffer.from(event.body, 'base64');
+      const imageName = `${Date.now()}-image.jpg`; // Assuming it's a jpg, adjust as needed
+      imagePath = `images/notations/${imageName}`;
+
+      await octokit.repos.createOrUpdateFileContents({
+        owner: 'AlKYala',
+        repo: 'notation-census-project',
+        path: `src/${imagePath}`,
+        message: `Add image for notation: ${fields.title}`,
+        content: imageBuffer.toString('base64'),
+        branch: 'develop'
+      });
+    }
 
     const content = JSON.stringify({
-      title,
-      symbol,
-      definition,
-      usage,
+      title: fields.title,
+      symbol: fields.symbol,
+      definition: fields.definition,
+      usage: fields.usage,
+      image: imagePath,
       examples: [
-        { description: example1_description, latex: example1_latex },
-        { description: example2_description, latex: example2_latex }
+        { description: fields.example1_description, latex: fields.example1_latex },
+        { description: fields.example2_description, latex: fields.example2_latex }
       ],
-      tags: tags.split(',').map(tag => tag.trim()),
-      relatedConcepts: relatedConcepts.split(',').map(concept => concept.trim())
+      tags: fields.tags ? fields.tags.split(',').map(tag => tag.trim()) : [],
+      relatedConcepts: fields.relatedConcepts ? fields.relatedConcepts.split(',').map(concept => concept.trim()) : []
     }, null, 2);
 
-    const fileName = `${title.toLowerCase().replace(/\s+/g, '-')}.json`;
+    const fileName = `${fields.title ? fields.title.toLowerCase().replace(/\s+/g, '-') : 'untitled'}.json`;
 
     const repoDetails = {
       owner: 'AlKYala',
@@ -43,7 +63,7 @@ exports.handler = async (event) => {
 
     await octokit.repos.createOrUpdateFileContents({
       ...repoDetails,
-      message: `Add new notation: ${title}`,
+      message: `Add new notation: ${fields.title || 'Untitled'}`,
       content: Buffer.from(content).toString('base64')
     });
 
@@ -52,10 +72,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ message: "Notation added successfully" }),
     };
   } catch (error) {
-    console.error('Error details:', error.message, error.status, error.headers);
-    if (error.response) {
-      console.error('Error response:', error.response.data);
-    }
-    return { statusCode: 500, body: JSON.stringify({ error: error.message, details: error.response ? error.response.data : 'No additional details' }) };
+    console.error('Error details:', error.message, error.stack);
+    return { statusCode: 500, body: JSON.stringify({ error: error.message, stack: error.stack }) };
   }
 };
