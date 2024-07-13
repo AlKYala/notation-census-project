@@ -1,6 +1,7 @@
 module.exports = function(eleventyConfig) {
   // Add support for JSON files
   eleventyConfig.addDataExtension("json", contents => JSON.parse(contents));
+  eleventyConfig.addPassthroughCopy("src/images");
   
   // Create a collection for each tag
   eleventyConfig.addCollection("taggedNotations", function(collectionApi) {
