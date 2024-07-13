@@ -22,13 +22,17 @@ title: Submit a New Notation
     <label>Example 1 Description: <input type="text" name="example1_description" /></label>
   </p>
   <p>
-    <label>Example 1 LaTeX: <input type="text" name="example1_latex" /></label>
+    <label>Example 1 LaTeX:</label>
+    <math-field id="latex-editor-1"></math-field>
+    <input type="hidden" name="example1_latex" id="example1_latex_input" />
   </p>
   <p>
     <label>Example 2 Description: <input type="text" name="example2_description" /></label>
   </p>
   <p>
-    <label>Example 2 LaTeX: <input type="text" name="example2_latex" /></label>
+    <label>Example 2 LaTeX:</label>
+    <math-field id="latex-editor-2"></math-field>
+    <input type="hidden" name="example2_latex" id="example2_latex_input" />
   </p>
   <p>
     <label>Tags (comma-separated): <input type="text" name="tags" required /></label>
@@ -39,4 +43,49 @@ title: Submit a New Notation
   <p>
     <button type="submit">Submit Notation</button>
   </p>
+
+  <p>
+    <label>Previews:</label>
+    <div id="latex-preview-1" class="latex-preview"></div>
+    <div id="latex-preview-2" class="latex-preview"></div>
+  </p>
 </form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mf1 = document.getElementById('latex-editor-1');
+  const mf2 = document.getElementById('latex-editor-2');
+
+  mf1.addEventListener('input', (ev) => {
+    document.getElementById('example1_latex_input').value = ev.target.value;
+    updatePreview(ev.target.value, 'latex-preview-1');
+  });
+
+  mf2.addEventListener('input', (ev) => {
+    document.getElementById('example2_latex_input').value = ev.target.value;
+    updatePreview(ev.target.value, 'latex-preview-2');
+  });
+
+  function updatePreview(latex, previewId) {
+    const preview = document.getElementById(previewId);
+    preview.innerHTML = MathLive.renderMathInElement(latex);
+  }
+});
+</script>
+
+<style>
+  math-field {
+    display: block;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    min-height: 50px;
+  }
+  .latex-preview {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    min-height: 30px;
+  }
+</style>
