@@ -23,7 +23,7 @@ title: Submit a New Notation
   </p>
   <p>
     <label>Example 1 LaTeX:</label>
-    <div id="latex-editor-1" class="latex-editor"></div>
+    <math-field id="latex-editor-1"></math-field>
     <input type="hidden" name="example1_latex" id="example1_latex_input" />
   </p>
   <p>
@@ -31,7 +31,7 @@ title: Submit a New Notation
   </p>
   <p>
     <label>Example 2 LaTeX:</label>
-    <div id="latex-editor-2" class="latex-editor"></div>
+    <math-field id="latex-editor-2"></math-field>
     <input type="hidden" name="example2_latex" id="example2_latex_input" />
   </p>
   <p>
@@ -53,50 +53,39 @@ title: Submit a New Notation
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var mathField1 = MQ.MathField(document.getElementById('latex-editor-1'), {
-    handlers: {
-      edit: function() {
-        document.getElementById('example1_latex_input').value = mathField1.latex();
-        updatePreview(mathField1, 'latex-preview-1');
-      }
-    }
+  const mf1 = document.getElementById('latex-editor-1');
+  const mf2 = document.getElementById('latex-editor-2');
+
+  mf1.addEventListener('input', (ev) => {
+    document.getElementById('example1_latex_input').value = ev.target.value;
+    updatePreview(ev.target.value, 'latex-preview-1');
   });
 
-  var mathField2 = MQ.MathField(document.getElementById('latex-editor-2'), {
-    handlers: {
-      edit: function() {
-        document.getElementById('example2_latex_input').value = mathField2.latex();
-        updatePreview(mathField2, 'latex-preview-2');
-      }
-    }
+  mf2.addEventListener('input', (ev) => {
+    document.getElementById('example2_latex_input').value = ev.target.value;
+    updatePreview(ev.target.value, 'latex-preview-2');
   });
 
-  function updatePreview(mathField, previewId) {
-    var latex = mathField.latex();
-    var preview = document.getElementById(previewId);
-    katex.render(latex, preview, {
-      throwOnError: false
-    });
+  function updatePreview(latex, previewId) {
+    const preview = document.getElementById(previewId);
+    preview.innerHTML = MathLive.renderMathInElement(latex);
   }
-
-  // Initial preview update
-  updatePreview(mathField1, 'latex-preview-1');
-  updatePreview(mathField2, 'latex-preview-2');
 });
 </script>
 
 <style>
-  .latex-editor {
-    width: 100%;
-    height: 100px;
+  math-field {
+    display: block;
     border: 1px solid #ccc;
+    padding: 8px;
     margin-bottom: 10px;
-  }
-  .latex-preview {
     width: 100%;
     min-height: 50px;
+  }
+  .latex-preview {
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
+    min-height: 30px;
   }
 </style>
