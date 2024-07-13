@@ -23,7 +23,7 @@ title: Submit a New Notation
   </p>
   <p>
     <label>Example 1 LaTeX:</label>
-    <span id="latex-editor-1"></span>
+    <div id="latex-editor-1" class="latex-editor"></div>
     <input type="hidden" name="example1_latex" id="example1_latex_input" />
   </p>
   <p>
@@ -31,7 +31,7 @@ title: Submit a New Notation
   </p>
   <p>
     <label>Example 2 LaTeX:</label>
-    <span id="latex-editor-2"></span>
+    <div id="latex-editor-2" class="latex-editor"></div>
     <input type="hidden" name="example2_latex" id="example2_latex_input" />
   </p>
   <p>
@@ -45,56 +45,58 @@ title: Submit a New Notation
   </p>
 
   <p>
-  <label>Preview:</label>
-  <div id="latex-preview-1"></div>
-  <div id="latex-preview-2"></div>
-</p>
+    <label>Previews:</label>
+    <div id="latex-preview-1" class="latex-preview"></div>
+    <div id="latex-preview-2" class="latex-preview"></div>
+  </p>
 </form>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var mathField1 = MQ.MathField(document.getElementById('latex-editor-1'), {
-      handlers: {
-        edit: function() {
-          document.getElementById('example1_latex_input').value = mathField1.latex();
-        }
+document.addEventListener('DOMContentLoaded', function() {
+  var mathField1 = MQ.MathField(document.getElementById('latex-editor-1'), {
+    handlers: {
+      edit: function() {
+        document.getElementById('example1_latex_input').value = mathField1.latex();
+        updatePreview(mathField1, 'latex-preview-1');
       }
-
-      
-    });
-
-    var mathField2 = MQ.MathField(document.getElementById('latex-editor-2'), {
-      handlers: {
-        edit: function() {
-          document.getElementById('example2_latex_input').value = mathField2.latex();
-        }
-      }
-    });
-
-      function updatePreview(mathField, previewId) {
-      var latex = mathField.latex();
-      var preview = document.getElementById(previewId);
-      katex.render(latex, preview, {
-        throwOnError: false
-      });
     }
-
-    mathField1.config({
-      handlers: {
-        edit: function() {
-          document.getElementById('example1_latex_input').value = mathField1.latex();
-          updatePreview(mathField1, 'latex-preview-1');
-        }
-      }
-    });
-
-    mathField2.config({
-      handlers: {
-        edit: function() {
-          document.getElementById('example2_latex_input').value = mathField2.latex();
-          updatePreview(mathField2, 'latex-preview-2');
-        }
-      }
-    });
   });
+
+  var mathField2 = MQ.MathField(document.getElementById('latex-editor-2'), {
+    handlers: {
+      edit: function() {
+        document.getElementById('example2_latex_input').value = mathField2.latex();
+        updatePreview(mathField2, 'latex-preview-2');
+      }
+    }
+  });
+
+  function updatePreview(mathField, previewId) {
+    var latex = mathField.latex();
+    var preview = document.getElementById(previewId);
+    katex.render(latex, preview, {
+      throwOnError: false
+    });
+  }
+
+  // Initial preview update
+  updatePreview(mathField1, 'latex-preview-1');
+  updatePreview(mathField2, 'latex-preview-2');
+});
 </script>
+
+<style>
+  .latex-editor {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  .latex-preview {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
