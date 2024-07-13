@@ -1,0 +1,26 @@
+{
+  "title": "PICTESTR",
+  "symbol": "PICTEST",
+  "definition": "R",
+  "usage": "R",
+  "image": "images/notations/1720900356308-testX2.PNG",
+  "examples": [
+    {
+      "description": "TEST1",
+      "latex": ""
+    },
+    {
+      "description": "TEST2",
+      "latex": ""
+    }
+  ],
+  "tags": [
+    "tag1",
+    "tag2",
+    "test"
+  ],
+  "relatedConcepts": [
+    "test1",
+    "test2"
+  ]
+}
