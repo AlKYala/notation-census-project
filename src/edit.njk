@@ -1,0 +1,80 @@
+---
+layout: base.njk
+pagination:
+  data: notations
+  size: 1
+  alias: notationEntry
+  resolve: values
+permalink: "edit/{{ notationEntry.title | slug }}/"
+---
+
+<h1>Edit Notation: {{ notationEntry.title }}</h1>
+
+<form name="notation-edit" method="POST" action="/.netlify/functions/update-notation" enctype="multipart/form-data">
+  <input type="hidden" name="originalTitle" value="{{ notationEntry.title }}">
+  
+  <p>
+    <label>Title: <input type="text" name="title" value="{{ notationEntry.title }}" required /></label>
+  </p>
+  <p>
+    <label>Symbol: <input type="text" name="symbol" value="{{ notationEntry.symbol }}" required /></label>
+  </p>
+  <p>
+    <label>Definition: <textarea name="definition" required>{{ notationEntry.definition }}</textarea></label>
+  </p>
+  <p>
+    <label>Usage: <textarea name="usage" required>{{ notationEntry.usage }}</textarea></label>
+  </p>
+  <p>
+    <label>Current Image: 
+      {% if notationEntry.image %}
+        <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration" style="max-width: 200px;">
+      {% else %}
+        No image uploaded
+      {% endif %}
+    </label>
+  </p>
+  <p>
+    <label>Update Image: <input type="file" name="image" accept="image/*" /></label>
+  </p>
+  <p>
+    <label>Example 1 Description: <input type="text" name="example1_description" value="{{ notationEntry.examples[0].description }}" /></label>
+  </p>
+  <p>
+    <label>Example 1 LaTeX:</label>
+    <math-field id="latex-editor-1">{{ notationEntry.examples[0].latex }}</math-field>
+    <input type="hidden" name="example1_latex" id="example1_latex_input" value="{{ notationEntry.examples[0].latex }}" />
+  </p>
+  <p>
+    <label>Example 2 Description: <input type="text" name="example2_description" value="{{ notationEntry.examples[1].description }}" /></label>
+  </p>
+  <p>
+    <label>Example 2 LaTeX:</label>
+    <math-field id="latex-editor-2">{{ notationEntry.examples[1].latex }}</math-field>
+    <input type="hidden" name="example2_latex" id="example2_latex_input" value="{{ notationEntry.examples[1].latex }}" />
+  </p>
+  <p>
+    <label>Tags (comma-separated): <input type="text" name="tags" value="{{ notationEntry.tags | join(', ') }}" required /></label>
+  </p>
+  <p>
+    <label>Related Concepts (comma-separated): <input type="text" name="relatedConcepts" value="{{ notationEntry.relatedConcepts | join(', ') }}" /></label>
+  </p>
+  <p>
+    <button type="submit">Update Notation</button>
+  </p>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mf1 = document.getElementById('latex-editor-1');
+  const mf2 = document.getElementById('latex-editor-2');
+
+  mf1.addEventListener('input', (ev) => {
+    document.getElementById('example1_latex_input').value = ev.target.value;
+  });
+
+  mf2.addEventListener('input', (ev) => {
+    document.getElementById('example2_latex_input').value = ev.target.value;
+  });
+});
+</script>

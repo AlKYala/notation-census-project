@@ -11,6 +11,9 @@ permalink: "notations/{{ notationEntry.title | slug }}/"
 <article class="notation">
   <h1>{{ notationEntry.title }}</h1>
   
+  <a href="/edit/{{ notationEntry.title | slug }}/" class="edit-button">Edit this notation</a>
+
+  
   {% if notationEntry.image %}
   <section class="notation-image">
     <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration">
