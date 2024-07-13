@@ -1,0 +1,24 @@
+{
+  "title": "test",
+  "symbol": "Test",
+  "definition": "RRRR",
+  "usage": "aaaaa",
+  "examples": [
+    {
+      "description": "",
+      "latex": "542\\int_0^{\\infty}\\!523653\\,\\mathrm{d}x"
+    },
+    {
+      "description": "",
+      "latex": "694^{566}\\sqrt{88566223>}"
+    }
+  ],
+  "tags": [
+    "test1",
+    "test2"
+  ],
+  "relatedConcepts": [
+    "test3",
+    "test4"
+  ]
+}
