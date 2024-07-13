@@ -12,8 +12,10 @@
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@octokit/rest": "^21.0.0",
+    "busboy": "^1.6.0",
     "dotenv": "^16.4.5",
     "katex": "^0.16.11",
+    "multipart-formdata": "^1.1.0",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {

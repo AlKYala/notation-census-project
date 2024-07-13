@@ -5,72 +5,67 @@ title: Submit a New Notation
 
 <h1>Submit a New Notation</h1>
 
-<form name="notation-submission" method="POST" action="/.netlify/functions/create-notation">
-  <p>
-    <label>Title: <input type="text" name="title" required /></label>
+<form name="notation-submission" method="POST" action="/.netlify/functions/create-notation" enctype="multipart/form-data">  <p>
+    <label>Title: <input type="text" name="title" required/></label>
   </p>
   <p>
-    <label>Symbol: <input type="text" name="symbol" required /></label>
+    <label>Symbol: <input type="text" name="symbol" required/></label>
   </p>
   <p>
-    <label>Definition: <textarea name="definition" required></textarea></label>
+    <label>Definition: <textarea name="definition" required></textarea>
+    </label>
   </p>
   <p>
-    <label>Usage: <textarea name="usage" required></textarea></label>
+    <label>Usage: <textarea name="usage" required></textarea>
+    </label>
   </p>
   <p>
-    <label>Example 1 Description: <input type="text" name="example1_description" /></label>
+    <label>Image: <input type="file" name="image" accept="image/*"/></label>
+  </p>
+  <p>
+    <label>Example 1 Description: <input type="text" name="example1_description"/></label>
   </p>
   <p>
     <label>Example 1 LaTeX:</label>
     <math-field id="latex-editor-1"></math-field>
-    <input type="hidden" name="example1_latex" id="example1_latex_input" />
+    <input type="hidden" name="example1_latex" id="example1_latex_input"/>
   </p>
   <p>
-    <label>Example 2 Description: <input type="text" name="example2_description" /></label>
+    <label>Example 2 Description: <input type="text" name="example2_description"/></label>
   </p>
   <p>
     <label>Example 2 LaTeX:</label>
     <math-field id="latex-editor-2"></math-field>
-    <input type="hidden" name="example2_latex" id="example2_latex_input" />
+    <input type="hidden" name="example2_latex" id="example2_latex_input"/>
   </p>
   <p>
-    <label>Tags (comma-separated): <input type="text" name="tags" required /></label>
+    <label>Tags (comma-separated): <input type="text" name="tags" required/></label>
   </p>
   <p>
-    <label>Related Concepts (comma-separated): <input type="text" name="relatedConcepts" /></label>
+    <label>Related Concepts (comma-separated): <input type="text" name="relatedConcepts"/></label>
   </p>
   <p>
     <button type="submit">Submit Notation</button>
   </p>
-
-  <p>
-    <label>Previews:</label>
-    <div id="latex-preview-1" class="latex-preview"></div>
-    <div id="latex-preview-2" class="latex-preview"></div>
-  </p>
 </form>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const mf1 = document.getElementById('latex-editor-1');
-  const mf2 = document.getElementById('latex-editor-2');
+  document.addEventListener('DOMContentLoaded', function () {
+    const mf1 = document.getElementById('latex-editor-1');
+    const mf2 = document.getElementById('latex-editor-2');
 
-  mf1.addEventListener('input', (ev) => {
-    document.getElementById('example1_latex_input').value = ev.target.value;
-    updatePreview(ev.target.value, 'latex-preview-1');
+    mf1.addEventListener('input', (ev) => {
+      document
+        .getElementById('example1_latex_input')
+        .value = ev.target.value;
+    });
+
+    mf2.addEventListener('input', (ev) => {
+      document
+        .getElementById('example2_latex_input')
+        .value = ev.target.value;
+    });
   });
-
-  mf2.addEventListener('input', (ev) => {
-    document.getElementById('example2_latex_input').value = ev.target.value;
-    updatePreview(ev.target.value, 'latex-preview-2');
-  });
-
-  function updatePreview(latex, previewId) {
-    const preview = document.getElementById(previewId);
-    preview.innerHTML = MathLive.renderMathInElement(latex);
-  }
-});
 </script>
 
 <style>
