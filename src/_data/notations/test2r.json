@@ -1,0 +1,25 @@
+{
+  "title": "TEST2R",
+  "symbol": "TEST2R",
+  "definition": "blabla",
+  "usage": "blabla",
+  "image": "images/notations/1720900491511-testX2.PNG",
+  "examples": [
+    {
+      "description": "DRSCR 1",
+      "latex": "\\cos\\cos\\cos\\cos\\cos\\cos\\cos\\cos"
+    },
+    {
+      "description": "Hi wie gehts",
+      "latex": "\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon\\epsilon"
+    }
+  ],
+  "tags": [
+    "test1",
+    "test2"
+  ],
+  "relatedConcepts": [
+    "test3",
+    "test4"
+  ]
+}
