@@ -35,7 +35,11 @@ module.exports = function(eleventyConfig) {
     return tagList;
   });
 
-  
+  eleventyConfig.addCollection("notationsEdit", function(collectionApi) {
+    return collectionApi.getAll().filter(function(item) {
+      return item.inputPath.includes("notations/");
+    });
+  });
 
   return {
     dir: {

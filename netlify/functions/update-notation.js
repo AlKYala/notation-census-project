@@ -39,7 +39,7 @@ exports.handler = async (event) => {
         const { Octokit } = await import("@octokit/rest");
         const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-        let imagePath = '';
+        let imagePath = fields.currentImage || '';
         if (imageBuffer && imageName) {
           const uniqueImageName = `${Date.now()}-${imageName}`;
           imagePath = `images/notations/${uniqueImageName}`;
@@ -48,7 +48,7 @@ exports.handler = async (event) => {
             owner: 'AlKYala',
             repo: 'notation-census-project',
             path: `src/${imagePath}`,
-            message: `Add image for notation: ${fields.title}`,
+            message: `Update image for notation: ${fields.title}`,
             content: imageBuffer.toString('base64'),
             branch: 'resource/asset-mule'
           });
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
           relatedConcepts: fields.relatedConcepts ? fields.relatedConcepts.split(',').map(concept => concept.trim()) : []
         }, null, 2);
 
-        const fileName = `${fields.title ? fields.title.toLowerCase().replace(/\s+/g, '-') : 'untitled'}.json`;
+        const fileName = `${fields.title.toLowerCase().replace(/\s+/g, '-')}.json`;
         const filePath = `src/_data/notations/${fileName}`;
 
         const repoDetails = {
@@ -92,14 +92,35 @@ exports.handler = async (event) => {
 
         await octokit.repos.createOrUpdateFileContents({
           ...repoDetails,
-          message: `Add new notation: ${fields.title || 'Untitled'}`,
+          message: `Update notation: ${fields.title}`,
           content: Buffer.from(content).toString('base64'),
-          sha: sha // This will be undefined if the file doesn't exist, which is what we want
+          sha: sha
         });
 
+        // If the title has changed, delete the old file
+        if (fields.originalTitle !== fields.title) {
+          const oldFileName = `${fields.originalTitle.toLowerCase().replace(/\s+/g, '-')}.json`;
+          const oldFilePath = `src/_data/notations/${oldFileName}`;
+          const oldFileDetails = { ...repoDetails, path: oldFilePath };
+          
+          try {
+            const { data } = await octokit.repos.getContent(oldFileDetails);
+            await octokit.repos.deleteFile({
+              ...oldFileDetails,
+              message: `Delete old notation file: ${fields.originalTitle}`,
+              sha: data.sha
+            });
+          } catch (error) {
+            console.error('Error deleting old file:', error);
+          }
+        }
+
         resolve({
-          statusCode: 200,
-          body: JSON.stringify({ message: "Notation added successfully" }),
+          statusCode: 302,
+          headers: {
+            Location: `/notations/${fields.title.toLowerCase().replace(/\s+/g, '-')}/`,
+          },
+          body: JSON.stringify({ message: "Notation updated successfully" }),
         });
       } catch (error) {
         console.error('Error details:', error.message, error.stack);
