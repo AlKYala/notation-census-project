@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default("Notation Census") }}</title>
-    <link rel="stylesheet" href="https://unpkg.com/mathlive/dist/mathlive-static.css">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://unpkg.com/mathlive/dist/mathlive.min.js"></script>
-</head>
-<body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/tags/">All Tags</a>
-        <a href="/submit/">Submit Notation</a>
-    </nav>
-    
-    {{ content | safe }}
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title | default("Notation Census") }}</title>
+        <link rel="stylesheet" href="https://unpkg.com/mathlive/dist/mathlive-static.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <script src="https://unpkg.com/mathlive/dist/mathlive.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@lemoussel/toot-js@1.1.5/dist/toot.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title | default("Notation Census") }}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="h-full">
+        <div class="min-h-full">
+            <nav class="bg-gray-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <span class="text-white text-xl font-bold">Notation Census</span>
+                            </div>
+                            <div class="hidden md:block">
+                                <div class="ml-10 flex items-baseline space-x-4">
+                                    <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                                    <a href="/notations/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Notations</a>
+                                    <a href="/tags/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tags</a>
+                                    <a href="/submit/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Submit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
 
-    <script src="/assets/js/form-validation.js"></script>
-</body>
+            <main>
+                <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                    {{ content | safe }}
+                </div>
+            </main>
+        </div>
+    </body>
 </html>
