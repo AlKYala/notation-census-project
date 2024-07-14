@@ -8,73 +8,104 @@ pagination:
 permalink: "edit/{{ notationEntry.title | slug }}/"
 ---
 
-<h1>Edit Notation: {{ notationEntry.title }}</h1>
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            Edit Notation: {{ notationEntry.title }}
+        </h1>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+        <form name="notation-edit" method="POST" action="/.netlify/functions/update-notation" enctype="multipart/form-data" class="space-y-8">
+            <input type="hidden" name="originalTitle" value="{{ notationEntry.title }}">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                <div class="col-span-1">
+                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" name="title" id="title" value="{{ notationEntry.title }}" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
 
-<form name="notation-edit" method="POST" action="/.netlify/functions/update-notation" enctype="multipart/form-data">
-  <input type="hidden" name="originalTitle" value="{{ notationEntry.title }}">
-  
-  <p>
-    <label>Title: <input type="text" name="title" value="{{ notationEntry.title }}" required /></label>
-  </p>
-  <p>
-    <label>Symbol: <input type="text" name="symbol" value="{{ notationEntry.symbol }}" required /></label>
-  </p>
-  <p>
-    <label>Definition: <textarea name="definition" required>{{ notationEntry.definition }}</textarea></label>
-  </p>
-  <p>
-    <label>Usage: <textarea name="usage" required>{{ notationEntry.usage }}</textarea></label>
-  </p>
-  <p>
-    <label>Current Image: 
-      {% if notationEntry.image %}
-        <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration" style="max-width: 200px;">
-      {% else %}
-        No image uploaded
-      {% endif %}
-    </label>
-  </p>
-  <p>
-    <label>Update Image: <input type="file" name="image" accept="image/*" /></label>
-  </p>
-  <p>
-    <label>Example 1 Description: <input type="text" name="example1_description" value="{{ notationEntry.examples[0].description }}" /></label>
-  </p>
-  <p>
-    <label>Example 1 LaTeX:</label>
-    <math-field id="latex-editor-1">{{ notationEntry.examples[0].latex }}</math-field>
-    <input type="hidden" name="example1_latex" id="example1_latex_input" value="{{ notationEntry.examples[0].latex }}" />
-  </p>
-  <p>
-    <label>Example 2 Description: <input type="text" name="example2_description" value="{{ notationEntry.examples[1].description }}" /></label>
-  </p>
-  <p>
-    <label>Example 2 LaTeX:</label>
-    <math-field id="latex-editor-2">{{ notationEntry.examples[1].latex }}</math-field>
-    <input type="hidden" name="example2_latex" id="example2_latex_input" value="{{ notationEntry.examples[1].latex }}" />
-  </p>
-  <p>
-    <label>Tags (comma-separated): <input type="text" name="tags" value="{{ notationEntry.tags | join(', ') }}" required /></label>
-  </p>
-  <p>
-    <label>Related Concepts (comma-separated): <input type="text" name="relatedConcepts" value="{{ notationEntry.relatedConcepts | join(', ') }}" /></label>
-  </p>
-  <p>
-    <button type="submit">Update Notation</button>
-  </p>
-</form>
+                <div class="col-span-1">
+                    <label for="symbol" class="block text-sm font-medium text-gray-700">Symbol</label>
+                    <input type="text" name="symbol" id="symbol" value="{{ notationEntry.symbol }}" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-2">
+                    <label for="definition" class="block text-sm font-medium text-gray-700">Definition</label>
+                    <textarea name="definition" id="definition" rows="3" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">{{ notationEntry.definition }}</textarea>
+                </div>
+
+                <div class="col-span-2">
+                    <label for="usage" class="block text-sm font-medium text-gray-700">Usage</label>
+                    <textarea name="usage" id="usage" rows="3" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">{{ notationEntry.usage }}</textarea>
+                </div>
+
+                <div class="col-span-2">
+                    <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+                    {% if notationEntry.image %}
+                    <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration" class="mt-1 max-w-xs h-auto">
+                    {% endif %}
+                    <input type="file" name="image" id="image" accept="image/*" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="example1_description" class="block text-sm font-medium text-gray-700">Example 1 Description</label>
+                    <input type="text" name="example1_description" id="example1_description" value="{{ notationEntry.examples[0].description }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="example1_latex" class="block text-sm font-medium text-gray-700">Example 1 LaTeX</label>
+                    <math-field id="latex-editor-1" class="mt-1 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">{{ notationEntry.examples[0].latex }}</math-field>
+                    <input type="hidden" name="example1_latex" id="example1_latex_input" value="{{ notationEntry.examples[0].latex }}">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="example2_description" class="block text-sm font-medium text-gray-700">Example 2 Description</label>
+                    <input type="text" name="example2_description" id="example2_description" value="{{ notationEntry.examples[1].description }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="example2_latex" class="block text-sm font-medium text-gray-700">Example 2 LaTeX</label>
+                    <math-field id="latex-editor-2" class="mt-1 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">{{ notationEntry.examples[1].latex }}</math-field>
+                    <input type="hidden" name="example2_latex" id="example2_latex_input" value="{{ notationEntry.examples[1].latex }}">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="tags" class="block text-sm font-medium text-gray-700">Tags (comma-separated)</label>
+                    <input type="text" name="tags" id="tags" value="{{ notationEntry.tags | join(', ') }}" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-1">
+                    <label for="relatedConcepts" class="block text-sm font-medium text-gray-700">Related Concepts (comma-separated)</label>
+                    <input type="text" name="relatedConcepts" id="relatedConcepts" value="{{ notationEntry.relatedConcepts | join(', ') }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md">
+                </div>
+            </div>
+
+            <div class="pt-5">
+                <div class="flex justify-end">
+                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Update Notation
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const mf1 = document.getElementById('latex-editor-1');
-  const mf2 = document.getElementById('latex-editor-2');
+    const mf1 = document.getElementById('latex-editor-1');
+    const mf2 = document.getElementById('latex-editor-2');
 
-  mf1.addEventListener('input', (ev) => {
-    document.getElementById('example1_latex_input').value = ev.target.value;
-  });
+    mf1.addEventListener('input', (ev) => {
+        document.getElementById('example1_latex_input').value = ev.target.value;
+    });
 
-  mf2.addEventListener('input', (ev) => {
-    document.getElementById('example2_latex_input').value = ev.target.value;
-  });
+    mf2.addEventListener('input', (ev) => {
+        document.getElementById('example2_latex_input').value = ev.target.value;
+    });
+
+    // Initialize the LaTeX editors with existing values
+    document.getElementById('example1_latex_input').value = mf1.getValue();
+    document.getElementById('example2_latex_input').value = mf2.getValue();
 });
 </script>

@@ -50,3 +50,18 @@ button {
 .latex-preview {
   background-color: #f9f9f9;
 }
+
+math-field {
+  border: 1px solid #D1D5DB;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+math-field:focus-within {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #6366F1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
