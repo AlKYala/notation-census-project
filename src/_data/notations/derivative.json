@@ -1,0 +1,29 @@
+{
+  "title": "Derivative",
+  "symbol": "d/dx",
+  "definition": "edit The derivative of a function represents its rate of change with respect to a variable, typically denoted as x.",
+  "usage": "The derivative of a function f(x) is written as f'(x) or df/dx.",
+  "image": "images/notations/1720956517678-testX2.PNG",
+  "examples": [
+    {
+      "description": "Derivative of x^2 EDIT",
+      "latex": "\\frac{d}{dx}(x^2)=2x\\forall\\forall\\forall\\forall\\forall\\forall"
+    },
+    {
+      "description": "Derivative notation",
+      "latex": "f^{\\prime}(x)=\\lim_{h\\to0}\\frac{f(x+h) - f(x)}{h}\\sigma\\sigma\\sigma\\sigma\\sigma\\sigma\\sigma\\sigma"
+    }
+  ],
+  "tags": [
+    "edit",
+    "calculus",
+    "differentiation",
+    "rate of change"
+  ],
+  "relatedConcepts": [
+    "edit",
+    "integral",
+    "limit",
+    "continuous function"
+  ]
+}
