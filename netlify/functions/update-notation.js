@@ -50,7 +50,7 @@ exports.handler = async (event) => {
             path: `src/${imagePath}`,
             message: `Update image for notation: ${fields.title}`,
             content: imageBuffer.toString('base64'),
-            branch: 'develop'
+            branch: 'resource/asset-mule'
           });
         }
 
@@ -75,7 +75,7 @@ exports.handler = async (event) => {
           owner: 'AlKYala',
           repo: 'notation-census-project',
           path: filePath,
-          branch: 'develop'
+          branch: 'resource/asset-mule'
         };
 
         console.log('Repo details:', repoDetails);
