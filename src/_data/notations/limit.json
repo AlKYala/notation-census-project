@@ -1,18 +1,29 @@
 {
-    "title": "Limit",
-    "symbol": "lim",
-    "definition": "The limit of a function is the value that the function approaches as the input (usually x) approaches a certain value.",
-    "usage": "The limit of f(x) as x approaches a is written as lim(x→a) f(x).",
-    "examples": [
-      {
-        "description": "Limit of sin(x)/x as x approaches 0",
-        "latex": "\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1"
-      },
-      {
-        "description": "Limit definition of e",
-        "latex": "e = \\lim_{n \\to \\infty} (1 + \\frac{1}{n})^n"
-      }
-    ],
-    "tags": ["calculus", "analysis", "convergence"],
-    "relatedConcepts": ["continuity", "derivative", "infinite series"]
-  }
+  "title": "Limit",
+  "symbol": "limEDIT",
+  "definition": "RThe limit of a function is the value that the function approaches as the input (usually x) approaches a certain value.",
+  "usage": "The limit of f(x) as x approaches a is Rwritten as lim(x→a) f(x).",
+  "image": "images/notations/1720956631610-testX2.PNG",
+  "examples": [
+    {
+      "description": "EDIT Limit of sin(x)/x as x approaches 0",
+      "latex": "\\lim_{x\\to0}\\frac{\\sin(x)}{x}=1\\ln\\ln\\ln\\ln\\ln\\ln\\ln\\ln\\ln\\ln"
+    },
+    {
+      "description": "Limit definition of e",
+      "latex": "e=\\lim_{n\\to\\infty}(1+\\frac{1}{n})^{n}\\zeta\\zeta\\zeta\\zeta\\zeta\\zeta\\zeta\\zeta\\zeta\\zeta"
+    }
+  ],
+  "tags": [
+    "edit",
+    "calculus",
+    "analysis",
+    "convergence"
+  ],
+  "relatedConcepts": [
+    "edit",
+    "continuity",
+    "derivative",
+    "infinite series"
+  ]
+}
