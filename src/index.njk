@@ -1,21 +1,77 @@
 ---
 layout: base.njk
+title: Notation Census - Home
 ---
 
-<h1>Notations</h1>
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            Welcome to Notation Census
+        </h1>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Exploring mathematical notations from around the world.
+        </p>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Notation of the Week
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <math-field read-only>
+                        \int \sec ax \cos ax \,dx = \frac{1}{2a}\sec^2 ax + C
+                    </math-field>
+                </dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Latest Additions
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                        {% set notationEntries = notations | dictsort | reverse %}
+                        {% for key, notation in notationEntries | limit(5) %}
+                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                                <div class="w-0 flex-1 flex items-center">
+                                    <span class="ml-2 flex-1 w-0 truncate">
+                                        {{ notation.title }}
+                                    </span>
+                                </div>
+                                <div class="ml-4 flex-shrink-0">
+                                    <a href="/notations/{{ notation.title | slug }}/" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                        View
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
 
-<ul>
-{% for notationKey, notation in notations %}
-  <li>
-    <a href="/notations/{{ notation.title | slug }}/">{{ notation.title }}</a>
-    <small>(Tags: 
-      {% for tag in notation.tags %}
-        <a href="/tags/{{ tag | slug }}/">{{ tag }}</a>{% if not loop.last %}, {% endif %}
-      {% endfor %}
-    )</small>
-  </li>
-{% endfor %}
-</ul>
+<div class="mt-8 bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <h2 class="text-lg leading-6 font-medium text-gray-900">
+            Contribute to Notation Census
+        </h2>
+        <div class="mt-2 max-w-xl text-sm text-gray-500">
+            <p>Help expand our collection of mathematical notations from around the world.</p>
+        </div>
+        <div class="mt-5">
+            <a href="/submit/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Submit a Notation
+            </a>
+        </div>
+    </div>
+</div>
 
-<h2>All Tags</h2>
-<p><a href="/tags/">View all tags</a></p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('math-field').forEach(function(element) {
+        element.setValue(element.textContent);
+    });
+});
+</script>

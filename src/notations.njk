@@ -8,68 +8,98 @@ pagination:
 permalink: "notations/{{ notationEntry.title | slug }}/"
 ---
 
-<article class="notation">
-  <h1>{{ notationEntry.title }}</h1>
-  
-  <a href="/edit/{{ notationEntry.title | slug }}/" class="edit-button">Edit this notation</a>
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            {{ notationEntry.title }}
+        </h1>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            {{ notationEntry.symbol }}
+        </p>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+            {% if notationEntry.image %}
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Image
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration" class="max-w-full h-auto">
+                </dd>
+            </div>
+            {% endif %}
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Definition
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ notationEntry.definition }}
+                </dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Usage
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ notationEntry.usage }}
+                </dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Examples
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                    {% for example in notationEntry.examples %}
+                        <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                            <div class="w-0 flex-1 flex items-center">
+                                <span class="ml-2 flex-1 w-0 truncate">
+                                    {{ example.description }}
+                                </span>
+                            </div>
+                            <div class="ml-4 flex-shrink-0">
+                                <math-field read-only>{{ example.latex }}</math-field>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </dd>
+            </div>
+<div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+    <dt class="text-sm font-medium text-gray-500">
+        Tags
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        {% for tag in notationEntry.tags %}
+            <a href="/tags/{{ tag | slug }}/" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mr-2 hover:bg-indigo-200 transition duration-150 ease-in-out">
+                {{ tag }}
+            </a>
+        {% endfor %}
+    </dd>
+</div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Related Concepts
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ notationEntry.relatedConcepts | join(", ") }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
 
-  
-  {% if notationEntry.image %}
-  <section class="notation-image">
-    <img src="/{{ notationEntry.image }}" alt="{{ notationEntry.title }} illustration">
-  </section>
-  {% endif %}
-
-  <section class="symbol">
-    <h2>Symbol</h2>
-    <p class="large-symbol">{{ notationEntry.symbol }}</p>
-  </section>
-
-  <section class="definition">
-    <h2>Definition</h2>
-    <p>{{ notationEntry.definition }}</p>
-  </section>
-
-  <section class="usage">
-    <h2>Usage</h2>
-    <p>{{ notationEntry.usage }}</p>
-  </section>
-
-  <section class="examples">
-    <h2>Examples</h2>
-    <ul>
-    {% for example in notationEntry.examples %}
-      <li>
-        <p>{{ example.description }}</p>
-        <math-field read-only>{{ example.latex }}</math-field>
-      </li>
-    {% endfor %}
-    </ul>
-  </section>
-
-  <section class="tags">
-    <h2>Tags</h2>
-    <ul>
-    {% for tag in notationEntry.tags %}
-      <li><a href="/tags/{{ tag | slug }}/">{{ tag }}</a></li>
-    {% endfor %}
-    </ul>
-  </section>
-
-  <section class="related-concepts">
-    <h2>Related Concepts</h2>
-    <ul>
-    {% for concept in notationEntry.relatedConcepts %}
-      <li>{{ concept }}</li>
-    {% endfor %}
-    </ul>
-  </section>
-</article>
+<div class="mt-4 flex justify-end">
+    <a href="/edit/{{ notationEntry.title | slug }}/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Edit this notation
+    </a>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('math-field').forEach(function(element) {
-    element.setValue(element.textContent);
-  });
+    document.querySelectorAll('math-field').forEach(function(element) {
+        element.setValue(element.textContent);
+    });
 });
 </script>
