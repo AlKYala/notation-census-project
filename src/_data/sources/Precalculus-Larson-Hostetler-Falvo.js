@@ -1,0 +1,12 @@
+
+const r = {
+  "type": "source",
+  "authors": ["Ron Larson", "Robert P. Hostetler", "David C. Falvo"],
+  "publisher" : { "name": "Brooks Cole"},
+  "ISBN13": "978-0618643448",
+  "links" : [{"label": "Google Books",  "url": "http://books.google.com/books?id=g1Bul7oPMF4C&pg=PA574&dq=Row+matrix&ei=HAdwS9u4HZryygT_6tSUDg&cd=2#v=onepage&q=&f=false"},
+              {"label": "Amazon", "url":  "http://www.amazon.com/Precalculus-Seventh-Edtition-Ron-Larson/dp/0618643443"}]
+}
+
+
+export default r;

@@ -4,7 +4,7 @@
 ## Object types
 
 ### base-object
-- short-name
+- (short-)name
 - human-readable-title (localized?)
 - contribution-history (sequence of dates, authors and descriptions)
 - (inherited by all objects)
@@ -17,7 +17,7 @@
 * Authors: Names and/or URLs
 * Contexts of use: (see #context-of-use)
 * Image-of-cover
-* (derived: all observations, )
+* Frequency (symbolic: isolated, some-communities, common, mainstream)
 
 
 ### Context of use
@@ -25,7 +25,6 @@
 * Language (iso-639-x)
 * Educational Level (age of use)
 * Application field (a string)
-* Frequency (symbolic: isolated, some-communities, common, mainstream)
 * Dates of bigger use
 
 ## Semantic

@@ -1,0 +1,9 @@
+{
+  "name": "half-open-interval",
+  "description": "Interval-co denotes the closed-open interval: a continuous 1-dimensional interval with the first point included in the interval, but the last excluded. The arguments are the start and the end points of the interval in that order.",
+  "openmath": "http://www.openmath.org/cd/interval1.xhtml#interval_co",
+  "wikipedia": "http://en.wikipedia.org/wiki/Interval_%28mathematics%29",
+  "others": {
+    "mathworld": "http://mathworld.wolfram.com/Interval.html"
+  }
+}
