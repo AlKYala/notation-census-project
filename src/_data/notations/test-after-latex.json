@@ -1,0 +1,19 @@
+{
+  "title": "TEst after latex",
+  "symbol": "WWW",
+  "definition": "WWW",
+  "usage": "QQQ",
+  "image": "images/notations/1723579760649-arabic2.PNG",
+  "examples": [
+    {
+      "description": "WW"
+    },
+    {
+      "description": "QQ"
+    }
+  ],
+  "tags": [
+    "Test"
+  ],
+  "relatedConcepts": []
+}
