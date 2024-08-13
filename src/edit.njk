@@ -53,20 +53,8 @@ permalink: "edit/{{ notationEntry.title | slug }}/"
                 </div>
 
                 <div class="col-span-2">
-                    <label for="example1_latex" class="block text-sm font-medium text-gray-700">Example 1 LaTeX</label>
-                    <math-field id="latex-editor-1" class="mt-1 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md border border-blue-200">{{ notationEntry.examples[0].latex }}</math-field>
-                    <input type="hidden" name="example1_latex" id="example1_latex_input" value="{{ notationEntry.examples[0].latex }}">
-                </div>
-
-                <div class="col-span-2">
                     <label for="example2_description" class="block text-sm font-medium text-gray-700">Example 2 Description</label>
                     <input type="text" name="example2_description" id="example2_description" value="{{ notationEntry.examples[1].description }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md border border-blue-200">
-                </div>
-
-                <div class="col-span-2">
-                    <label for="example2_latex" class="block text-sm font-medium text-gray-700">Example 2 LaTeX</label>
-                    <math-field id="latex-editor-2" class="mt-1 block w-full shadow-sm sm:text-lg border-gray-300 rounded-md border border-blue-200">{{ notationEntry.examples[1].latex }}</math-field>
-                    <input type="hidden" name="example2_latex" id="example2_latex_input" value="{{ notationEntry.examples[1].latex }}">
                 </div>
 
                 <div class="col-span-1">
@@ -90,22 +78,3 @@ permalink: "edit/{{ notationEntry.title | slug }}/"
         </form>
     </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mf1 = document.getElementById('latex-editor-1');
-    const mf2 = document.getElementById('latex-editor-2');
-
-    mf1.addEventListener('input', (ev) => {
-        document.getElementById('example1_latex_input').value = ev.target.value;
-    });
-
-    mf2.addEventListener('input', (ev) => {
-        document.getElementById('example2_latex_input').value = ev.target.value;
-    });
-
-    // Initialize the LaTeX editors with existing values
-    document.getElementById('example1_latex_input').value = mf1.getValue();
-    document.getElementById('example2_latex_input').value = mf2.getValue();
-});
-</script>

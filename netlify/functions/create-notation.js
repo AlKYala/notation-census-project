@@ -61,8 +61,8 @@ exports.handler = async (event) => {
           usage: fields.usage,
           image: imagePath,
           examples: [
-            { description: fields.example1_description, latex: fields.example1_latex },
-            { description: fields.example2_description, latex: fields.example2_latex }
+            { description: fields.example1_description },
+            { description: fields.example2_description }
           ],
           tags: fields.tags ? fields.tags.split(',').map(tag => tag.trim()) : [],
           relatedConcepts: fields.relatedConcepts ? fields.relatedConcepts.split(',').map(concept => concept.trim()) : []
